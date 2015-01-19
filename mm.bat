@@ -7,6 +7,7 @@ rem "nps 不提交到远程"
 rem "pp 先从远程获取更新"
 if {%1}=={pull} goto pull
 if {%1}=={push} goto push
+if {%1}=={pp} goto pp
 
 set comment="%*"
 git commit -m %comment%
@@ -14,7 +15,6 @@ goto push
 
 :setVal
 set comment="mm"
-<<<<<<< HEAD
 git commit -m %comment%
 goto push
 goto commit
@@ -23,6 +23,12 @@ goto commit
 set comment="pull"
 git commit -m %comment%
 git pull origin %2
+goto push
+
+:pp
+set comment="%*"
+git commit -m %comment%
+git pull
 goto push
 
 :commit
